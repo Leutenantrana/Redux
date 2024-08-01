@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseURL = "http://localhost:3001/anecdotes"
+const baseURL = "http://localhost:3011/anecdotes"
 const getAll = async () => {
     const response = await axios.get(baseURL)
     return response.data
@@ -14,17 +14,16 @@ const createAnecdote = async (content) => {
     return response.data
 }
 
-const updateAnecdote = async ({ id, newanecdote }) => {
+const updateAnecdote = async ({ id, object }) => {
     console.log(id)
-    console.log("object recieved in updateAnecdote", newanecdote)
+    console.log("object recieved in updateAnecdote", object)
     const URL = `${baseURL}/${id}`;
-    const response = await axios.put(URL, newanecdote)
+    const response = await axios.put(URL, object)
     console.log("object after put request", response.data)
     return response.data
 
 }
 const deleteAnecdote = async ({ id }) => {
-    console.log(id)
     const URL = `${baseURL}/${id}`;
     const response = await axios.delete(URL)
     return response.data
