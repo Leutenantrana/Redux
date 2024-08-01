@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './App.css'
 import './index.css'
-import {createStore} from 'redux'
-import noteReducer from './reducer/noteReducer'
+import noteReducer,{setNotes} from './reducer/noteReducer'
+import filterReducer from './reducer/filterReducer'
 import {Provider} from 'react-redux'
-const store = createStore(noteReducer)
+import store from './store'
 
+
+console.log(store.getState())
+store.subscribe(()=> console.log(store.getState()))
 
 
 

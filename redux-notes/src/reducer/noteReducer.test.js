@@ -1,9 +1,20 @@
-import { isExportDeclaration } from 'typescript'
 import noteReducer from './noteReducer'
 import deepFreeze from 'deep-freeze'
 
 describe('noteReducer', () => {
-    test('return new state with action NEW_NOTE', () => {
+    test('return new state with action notes/createNote', () => {
+        const state = []
+        const action = {
+            type: 'notes/createNote',
+            payload: 'the app is in redux state'
+        }
+        deepFreeze(state)
+        const newState = noteReducer(state, action)
+        expect(newState).toHaveLength(1)
+        expect(newState.map(s => s.content)).toContainEqual(action.payload)
+
+    })
+    test('returns new state with action notes/toggleImportanceOf', () => {
         const state = [{
             content: 'the app state is in redux store',
             important: true,
@@ -16,10 +27,8 @@ describe('noteReducer', () => {
         }
         ]
         const action = {
-            type: 'TOGGLE_IMPORTANCE',
-            payload: {
-                id: 2
-            }
+            type: 'notes/toggleImportanceOf',
+            payload: 2
         }
         deepFreeze(state)
         const newState = noteReducer(state, action)
